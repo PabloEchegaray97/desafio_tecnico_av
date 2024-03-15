@@ -1,0 +1,22 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar {
+  width: 100vw;
+}
+.navbar-title {
+  font-size: 1.5rem;
+  font-style: italic;
+  display: inline-block;
+}
+.navbar-title-decorator {
+  font-size: .6rem;
+  align-self: self-start;
+}
+.css-1juivf6-MuiTypography-root {
+  display: flex;
+  align-items: center;
+}
