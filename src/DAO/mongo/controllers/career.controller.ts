@@ -15,7 +15,7 @@ export class CareerController {
     @Post()
     async create(@Body() createCareerDto: Career): Promise<Career> {
         const createdCareer = new this.careerModel(createCareerDto);
-        return createdCareer;
+        return createdCareer.save();
     }
 
     @Put(':id')

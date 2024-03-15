@@ -21,5 +21,14 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    "linebreak-style": ["error", "unix"],
   },
+  "overrides": [
+    {
+      "files": ["*.js", "*.ts"], // Archivos JavaScript y TypeScript
+      "options": {
+        "linebreak-style": ["error", "windows"] // Ignorar errores de retorno de carro en estos archivos
+      }
+    }
+  ]
 };

@@ -9,7 +9,7 @@ export class EmployeeController {
 
     @Get()
     async findAll(): Promise<Employee[]> {
-        return this.employeeModel.find().exec();
+        return this.employeeModel.find().populate('skills').populate('career').exec();
     }
 
     @Post()
