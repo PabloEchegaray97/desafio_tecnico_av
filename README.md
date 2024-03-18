@@ -1,7 +1,24 @@
 # Gestión de Planes de Carrera
-| ![Logo de Nest.js](https://static-00.iconduck.com/assets.00/nestjs-icon-512x510-9nvpcyc3.png){width=200px height=200px} | ![Logo de React](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png){width=200px height=200px} | ![Logo de TypeScript](https://w7.pngwing.com/pngs/915/519/png-transparent-typescript-hd-logo-thumbnail.png){width=200px height=200px} |
-|:---:|:---:|:---:|
-| Nest.js | React | TypeScript |
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://static-00.iconduck.com/assets.00/nestjs-icon-512x510-9nvpcyc3.png" alt="Logo de Nest.js" width="200" height="200" />
+      <br />
+      Nest.js
+    </td>
+    <td align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="Logo de React" width="200" height="200" />
+      <br />
+      React
+    </td>
+    <td align="center">
+      <img src="https://w7.pngwing.com/pngs/915/519/png-transparent-typescript-hd-logo-thumbnail.png" alt="Logo de TypeScript" width="200" height="200" />
+      <br />
+      TypeScript
+    </td>
+  </tr>
+</table>
+
 
 
 Este proyecto consiste en una aplicación web para gestionar los planes de carrera de los colaboradores de una empresa. Utiliza React para el frontend, Nest.js para el backend, MongoDB como base de datos y TypeScript en todo el proyecto.
