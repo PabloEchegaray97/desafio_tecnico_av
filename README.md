@@ -1,4 +1,4 @@
-<h2 aling="center">Gestión de planes de carrera</h2
+#Gestion de planes de carrera - empleados
 <table>
   <tr>
     <td align="center">
@@ -18,9 +18,6 @@
     </td>
   </tr>
 </table>
-
-
-
 Este proyecto consiste en una aplicación web para gestionar los planes de carrera de los colaboradores de una empresa. Utiliza React para el frontend, Nest.js para el backend, MongoDB como base de datos y TypeScript en todo el proyecto.
 
 ## Requisitos Básicos
