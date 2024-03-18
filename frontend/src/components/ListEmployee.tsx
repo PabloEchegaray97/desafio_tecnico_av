@@ -6,7 +6,7 @@ import { Chip } from '@mui/material';
 import axios from 'axios';
 import DeleteModal from './DeleteModal';
 import AddEmployeeModal from './AddEmployeeModal';
-import EditEmployeeModal from './EditEmployeeModal'; 
+import EditEmployeeModal from './EditEmployeeModal';
 
 interface Employee {
     _id: string;
@@ -20,10 +20,10 @@ interface Employee {
 
 const EmployeesList: React.FC = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
-    const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null); 
+    const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false); 
+    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
         fetchEmployees();
@@ -42,7 +42,7 @@ const EmployeesList: React.FC = () => {
         try {
             await axios.delete(`http://localhost:3000/employee/${selectedEmployee?._id}`);
             fetchEmployees();
-            setIsDeleteModalOpen(false); 
+            setIsDeleteModalOpen(false);
         } catch (error) {
             console.error('Error deleting employee:', error);
         }
@@ -84,9 +84,9 @@ const EmployeesList: React.FC = () => {
                                                 key={skill._id}
                                                 label={skill.name}
                                                 sx={{
-                                                    margin:'2px',
-                                                    fontSize: '0.7rem', 
-                                                    padding: '0px' 
+                                                    margin: '2px',
+                                                    fontSize: '0.7rem',
+                                                    padding: '0px'
                                                 }}
                                             />
                                         ))
@@ -102,7 +102,7 @@ const EmployeesList: React.FC = () => {
                                         sx={{ color: '#FFBC52', cursor: 'pointer' }}
                                         onClick={() => {
                                             setSelectedEmployee(employee);
-                                            setIsEditModalOpen(true); 
+                                            setIsEditModalOpen(true);
                                         }}
                                     />
                                     <DeleteIcon
@@ -117,6 +117,7 @@ const EmployeesList: React.FC = () => {
                         ))}
                     </tbody>
                 </table>
+                
             </div>
             <DeleteModal
                 open={isDeleteModalOpen}

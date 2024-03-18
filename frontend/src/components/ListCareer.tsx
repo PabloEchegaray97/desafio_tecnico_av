@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditModal'; 
 import AddModal from './AddModal'; 
+import { toast } from 'react-toastify';
 
 interface Career {
     _id: string;
@@ -42,17 +43,22 @@ const CareersList: React.FC = () => {
         try {
             await axios.delete(`http://localhost:3000/career/${selectedCareer?._id}`);
             setCareers(prevCareers => prevCareers.filter(career => career._id !== selectedCareer?._id));
+            toast.success('Carrera eliminada con éxito');
             setIsDeleteModalOpen(false);
         } catch (error) {
+            toast.error(`Error al eliminar carrera ${error}`)
             console.error('Error deleting career:', error);
+
         }
     };
     const handleAddCareer = async (newCareer: Skill | Career) => {
         try {
             const response = await axios.post<Career>('http://localhost:3000/career', newCareer);
             setCareers(prevCareers => [...prevCareers, response.data]);
+            toast.success('Carrera agregada con éxito');
             setIsAddModalOpen(false);
         } catch (error) {
+            toast.error('Error al agregar carrera');
             console.error('Error adding career:', error);
         }
     };
@@ -61,8 +67,10 @@ const CareersList: React.FC = () => {
             const editedCareer = editedItem as Career;
             await axios.patch(`http://localhost:3000/career/${editedCareer._id}`, editedCareer);
             setCareers(prevCareers => prevCareers.map(career => (career._id === editedCareer._id ? editedCareer : career)));
+            toast.success('Carrera editada con éxito');
             setIsEditModalOpen(false);
         } catch (error) {
+            toast.error(`Error al editar carrera: ${error}`)
             console.error('Error editing career:', error);
         }
     };

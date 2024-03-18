@@ -140,7 +140,7 @@ const EditModal: React.FC<EditModalProps<Skill | Career>> = ({ open, onClose, it
                         sx={{ mt: 1, mb: 3, width: '100%' }}
                     />
                 )}
-                <div className='w100 flex-center'>
+                <div className='w100 flex-center m-top'>
                     <Button variant="contained" onClick={handleSave} sx={{ mr: 2 }}>
                         Guardar
                     </Button>

@@ -54,7 +54,7 @@ const AddModal: React.FC<AddModalProps<Skill | Career>> = ({ open, onClose, onAd
                 width: 400,
                 bgcolor: 'white',
                 boxShadow: 24,
-                p: 4
+                p: 4,
             }}>
                 <Typography variant="h5" component="h2" sx={{ mb: 2, textAlign: 'center', fontWeight: '700' }}>
                     {isSkill ? 'Agregar Habilidad' : 'Agregar Carrera'}
@@ -75,7 +75,7 @@ const AddModal: React.FC<AddModalProps<Skill | Career>> = ({ open, onClose, onAd
                         sx={{ mt: 1, mb: 3, width: '100%' }}
                     />
                 )}
-                <div className='w100 flex-center'>
+                <div className='w100 flex-center m-top'>
                     <Button variant="contained" onClick={handleAdd} sx={{ mr: 2 }}>
                         Agregar
                     </Button>

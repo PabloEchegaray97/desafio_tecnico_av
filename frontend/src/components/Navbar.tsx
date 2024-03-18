@@ -1,10 +1,10 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Link, Box, Drawer, List, ListItem, ListItemText, ListItemIcon, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home'; 
+import HomeIcon from '@mui/icons-material/Home';
 import BusinessIcon from '@mui/icons-material/Business';
 import WorkIcon from '@mui/icons-material/Work';
-import logo from '../assets/react.svg'; 
+import logo from '../assets/react.svg';
 
 const Navbar: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -22,10 +22,11 @@ const Navbar: React.FC = () => {
         <>
             <AppBar position="static" className='navbar'>
                 <Toolbar>
-                    
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <img src={logo} alt="Logo" style={{ height: '30px', marginRight: '10px' }} />
-                        <h1 className='navbar-title'>Employee</h1> <span className='navbar-title-decorator'>manager</span>
+                        <Link href="/" className='logo' >
+                            <img src={logo} alt="Logo" style={{ height: '30px', marginRight: '10px' }} />
+                            <h1 className='navbar-title'>Employee</h1> <span className='navbar-title-decorator'>manager</span>
+                        </Link>
                     </Typography>
                     {!isLargeScreen && (
                         <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleDrawerOpen}>
@@ -34,7 +35,7 @@ const Navbar: React.FC = () => {
                     )}
                     {isLargeScreen && (
                         <Box sx={{ display: 'flex' }}>
-                            <Link href="/" color="inherit" underline="none" sx={{ marginRight: '20px' }}>
+                            <Link href="/employees" color="inherit" underline="none" sx={{ marginRight: '20px' }}>
                                 Empleados
                             </Link>
                             <Link href="/careers" color="inherit" underline="none" sx={{ marginRight: '20px' }}>
@@ -54,26 +55,35 @@ const Navbar: React.FC = () => {
                 sx={{
                     '& .MuiDrawer-paper': {
                         background: '#1976d2',
-                        color:'white' 
+                        color: 'white'
                     },
                 }}
             >
                 <List>
                     <div className="w100 flex-center">
-                    <img src={logo} alt="Logo" style={{ height: '30px', margin: '10px auto' }} />
+                        <Link href="/">
+                            <img src={logo} alt="Logo" style={{ height: '30px', margin: '10px auto' }} />
+                        </Link>
                     </div>
-                    <ListItem  onClick={handleDrawerClose}>
-                        <ListItemIcon sx={{ color: 'white' }}><HomeIcon /></ListItemIcon>
-                        <ListItemText primary="Empleados" />
-                    </ListItem>
-                    <ListItem  onClick={handleDrawerClose}>
+                    <Link href="/employees" className='w100 flex-center c-white'>
+                        <ListItem onClick={handleDrawerClose}>
+                            <ListItemIcon sx={{ color: 'white' }}><HomeIcon /></ListItemIcon>
+                            <ListItemText primary="Empleados" />
+                        </ListItem>
+                    </Link>
+                    <Link href="/careers" className='w100 flex-center c-white'>
+                    <ListItem onClick={handleDrawerClose}>
                         <ListItemIcon sx={{ color: 'white' }}><BusinessIcon /></ListItemIcon>
                         <ListItemText primary="Carreras" />
                     </ListItem>
-                    <ListItem  onClick={handleDrawerClose}>
+                    </Link>
+                    <Link href="/skills" className='w100 flex-center c-white'>
+                    <ListItem onClick={handleDrawerClose}>
                         <ListItemIcon sx={{ color: 'white' }}><WorkIcon /></ListItemIcon>
                         <ListItemText primary="Habilidades" />
                     </ListItem>
+                    </Link>
+
                 </List>
             </Drawer>
         </>

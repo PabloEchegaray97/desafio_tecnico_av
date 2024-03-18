@@ -13,6 +13,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { isEmail, isAlpha } from 'validator';
 
 interface Skill {
     _id: string;
@@ -30,6 +31,10 @@ interface AddEmployeeModalProps {
     onClose: () => void;
     refreshEmployees: () => void;
 }
+
+const capitalize = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
 
 const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ open, onClose, refreshEmployees }) => {
     const [name, setName] = useState('');
@@ -83,21 +88,33 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ open, onClose, refr
     };
 
     const handleAddEmployee = async () => {
+        // Validar nombre y apellido
+        if (!isAlpha(name) || !isAlpha(lastname)) {
+            toast.error('El nombre y el apellido solo pueden contener letras.');
+            return;
+        }
+
         const emailExists = await checkExistingEmail(email);
         if (emailExists) {
             toast.error('El email ya está registrado.');
             return;
         }
 
+        if (!isEmail(email)) {
+            toast.error('Por favor ingrese un email válido.');
+            return;
+        }
+
         try {
             await axios.post('http://localhost:3000/employee', {
-                name,
-                lastname,
+                name: capitalize(name),
+                lastname: capitalize(lastname),
                 age: parseInt(age),
                 email,
                 skills: selectedSkills,
                 career: selectedCareer
             });
+            toast.success('Empleado agregado con exito');
             refreshEmployees();
             onClose();
         } catch (error) {

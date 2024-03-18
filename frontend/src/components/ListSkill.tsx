@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
 import AddModal from './AddModal';
-
+import { toast } from 'react-toastify';
 interface Skill {
     _id: string;
     name: string;
@@ -36,8 +36,10 @@ const SkillsList: React.FC = () => {
         try {
             await axios.delete(`http://localhost:3000/skill/${selectedSkill?._id}`);
             setSkills(prevSkills => prevSkills.filter(skill => skill._id !== selectedSkill?._id));
+            toast.success('Habilidad eliminada con éxito');
             setIsDeleteModalOpen(false);
         } catch (error) {
+            toast.error(`Error al eliminar habilidad: ${error}`)
             console.error('Error deleting skill:', error);
         }
     };
@@ -51,8 +53,10 @@ const SkillsList: React.FC = () => {
         try {
             const response = await axios.patch<Skill>(`http://localhost:3000/skill/${updatedSkill._id}`, updatedSkill);
             setSkills(prevSkills => prevSkills.map(skill => (skill._id === updatedSkill._id ? response.data : skill)));
+            toast.success('Habilidad editada con éxito');
             setIsEditModalOpen(false);
         } catch (error) {
+            toast.error(`Error al editar habilidad: ${error}`)
             console.error('Error updating skill:', error);
         }
     };
@@ -61,8 +65,10 @@ const SkillsList: React.FC = () => {
         try {
             const response = await axios.post<Skill>('http://localhost:3000/skill', newSkill);
             setSkills(prevSkills => [...prevSkills, response.data]);
+            toast.success('Habilidad agregada con éxito')
             setIsAddModalOpen(false);
         } catch (error) {
+            toast.error(`Error al agregar habilidad: ${error}`)
             console.error('Error adding skill:', error);
         }
     };

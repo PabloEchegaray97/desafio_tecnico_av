@@ -12,6 +12,7 @@ import Chip from '@mui/material/Chip';
 import CancelIcon from '@mui/icons-material/Cancel';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import validator from 'validator';
 
 interface Skill {
     _id: string;
@@ -95,9 +96,14 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
             if (employee.email === originalEmail) {
                 await saveEditedEmployee();
             } else {
+                const emailIsValid = validateEmail(employee.email);
+                if (!emailIsValid) {
+                    toast.error('Ingrese un correo electrónico válido');
+                    return;
+                }
                 const emailExists = await checkExistingEmail(employee.email);
                 if (emailExists) {
-                    toast.error('El nuevo email ya esta en uso, por favor elija otro.')
+                    toast.error('El nuevo email ya está en uso, por favor elija otro.');
                 } else {
                     await saveEditedEmployee();
                 }
@@ -117,9 +123,11 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
                 skills: selectedSkills,
                 career: selectedCareer
             });
+            toast.success('Empleado editado con éxito');
             refreshEmployees();
             onClose();
         } catch (error) {
+            toast.error(`Error al editar empleado: ${error}`)
             console.error('Error editing employee:', error);
         }
     };
@@ -139,6 +147,32 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
         } catch (error) {
             console.error('Error checking email:', error);
             return false;
+        }
+    };
+
+    const validateEmail = (email: string) => {
+        return validator.isEmail(email);
+    };
+
+    const capitalizeFirstLetter = (str: string) => {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    };
+
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (/^[a-zA-Z]+$/.test(value)) {
+            setEmployee({ ...employee, name: capitalizeFirstLetter(value) });
+        } else {
+            toast.error('Ingrese un nombre válido (solo letras).');
+        }
+    };
+
+    const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (/^[a-zA-Z]+$/.test(value)) {
+            setEmployee({ ...employee, lastname: capitalizeFirstLetter(value) });
+        } else {
+            toast.error('Ingrese un apellido válido (solo letras).');
         }
     };
 
@@ -173,14 +207,14 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
                     label="Nombre"
                     variant="outlined"
                     value={employee.name}
-                    onChange={(e) => setEmployee({ ...employee, name: e.target.value })}
+                    onChange={handleNameChange}
                     sx={{ mt: 1, mb: 1, width: '100%' }}
                 />
                 <TextField
                     label="Apellido"
                     variant="outlined"
                     value={employee.lastname}
-                    onChange={(e) => setEmployee({ ...employee, lastname: e.target.value })}
+                    onChange={handleLastNameChange}
                     sx={{ mt: 1, mb: 1, width: '100%' }}
                 />
                 <TextField
