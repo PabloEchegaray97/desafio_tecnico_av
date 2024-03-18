@@ -1,5 +1,5 @@
-# Gestión de Planes de Carrera
-<table>
+<h2 aling="center">Gestión de planes de carrera</h2
+<table align="center">
   <tr>
     <td align="center">
       <img src="https://static-00.iconduck.com/assets.00/nestjs-icon-512x510-9nvpcyc3.png" alt="Logo de Nest.js" width="200" height="200" />
