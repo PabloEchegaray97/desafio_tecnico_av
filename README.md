@@ -16,8 +16,14 @@
       <br />
       TypeScript
     </td>
+    <td align="center">
+      <img src="https://w7.pngwing.com/pngs/956/695/png-transparent-mongodb-original-wordmark-logo-icon-thumbnail.png" alt="Logo de MongoDB" width="200" height="200" />
+      <br />
+      MongoDB
+    </td>
   </tr>
 </table>
+
 Este proyecto consiste en una aplicación web para gestionar los planes de carrera de los colaboradores de una empresa. Utiliza React para el frontend, Nest.js para el backend, MongoDB como base de datos y TypeScript en todo el proyecto.
 
 ## Requisitos Básicos
