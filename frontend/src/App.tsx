@@ -1,17 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Button from '@mui/material/Button';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css';
 import Navbar from './components/Navbar';
+import ListEmployee from './components/ListEmployee';
+import ListCareer from './components/ListCareer';
+import ListSkill from './components/ListSkill'
+import { ToastContainer } from "react-toastify";
 function App() {
-
   return (
-    <>
-    <Navbar></Navbar>
-      <Button variant='contained'>Hello</Button>
-    </>
-  )
+    
+    <div className='app'>
+      <ToastContainer position="top-center"/>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+            <Route path="/" element={<ListEmployee />} />
+            <Route path="/careers" element={<ListCareer />} />
+            <Route path="/skills" element={<ListSkill />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
-export default App
+export default App;

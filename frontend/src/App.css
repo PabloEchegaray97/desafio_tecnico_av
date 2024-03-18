@@ -1,22 +1,189 @@
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 .navbar {
   width: 100vw;
 }
+
 .navbar-title {
   font-size: 1.5rem;
   font-style: italic;
   display: inline-block;
 }
+
 .navbar-title-decorator {
   font-size: .6rem;
   align-self: self-start;
 }
+
 .css-1juivf6-MuiTypography-root {
   display: flex;
   align-items: center;
+}
+.css-hip9hq-MuiPaper-root-MuiAppBar-root{
+  position: fixed !important;
+  height: 7vh !important;
+  justify-content: center;
+}
+/* styles.css */
+.mod {
+  outline: none !important;
+
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.td-email {
+  word-break: break-all;
+}
+th,
+td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: .5rem;
+}
+
+th {
+  /* background-color: #f2f2f2; */
+  border: none;
+  border-bottom: 1px solid #000;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #e0e0e0;
+}
+
+.iconTable {
+  display: flex;
+  align-items: center;
+  gap: 0.6pc;
+  justify-content: center;
+}
+
+.table-content {
+  margin: 1rem;
+}
+
+.table-container {
+  overflow-x: scroll;
+  padding-top: 7vh;
+}
+
+.table-title {
+  text-align: center;
+}
+
+.m-bottom {
+  margin-bottom: 1rem;
+}
+
+.m-top {
+  margin-top: 1rem;
+}
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  width: 100vw !important;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo semitransparente */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 1rem;
+  margin: 0 .5rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-actions {
+  margin-top: 2rem;
+}
+
+/* Estilos para botones */
+.modal-content button {
+  margin-right: 10px;
+}
+
+/* Estilos para títulos y descripciones */
+.modal-content h2 {
+  margin-bottom: 1rem;
+}
+
+.title-button {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5rem;
+  align-items: center;
+
+}
+
+.modal-title {
+  font-weight: 700 !important;
+}
+
+.d-flex {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: .1rem;
+}
+
+.chips-container {
+  margin-top: .4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+
+  td,
+  th {
+    padding: 0;
+  }
+
+  .table-content {
+    margin: 0;
+
+  }
+
+  .table-title {
+    font-size: 1.2rem;
+  }
+
+  th,
+  td {
+    padding: 0;
+    font-size: .7rem;
+    border-collapse: collapse;
+
+  }
 }
