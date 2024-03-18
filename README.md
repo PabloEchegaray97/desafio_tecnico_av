@@ -67,8 +67,9 @@ npm install
 - Crear un archivo `.env` en el directorio `backend` y configurar las variables de entorno necesarias, como la conexión a la base de datos MongoDB.
 
 3. **Ejecución del servidor:**
+```bash
 npm run start:dev
-
+```
 
 Este comando ejecutará el servidor en modo de desarrollo.
 
