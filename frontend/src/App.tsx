@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import ListEmployee from './components/ListEmployee';
 import ListCareer from './components/ListCareer';
 import ListSkill from './components/ListSkill'
+import NotFound from './components/NotFound'; // Importa el componente NotFound
+
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home";
 function App() {
@@ -18,7 +20,7 @@ function App() {
             <Route path="/careers" element={<ListCareer />} />
             <Route path="/skills" element={<ListSkill />} />
             <Route path="/" element={<Home />} />
-
+            <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
