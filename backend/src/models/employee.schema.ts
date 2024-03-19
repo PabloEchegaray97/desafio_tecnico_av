@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsNumber, IsEmail, IsArray, ValidateNested } from 'class-validator';
+import { IsString, IsNumber, IsEmail, IsArray, ValidateNested, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Skill, SkillSchema } from './skill.schema'; 
 import { Career, CareerSchema } from './career.schema'
@@ -11,40 +11,42 @@ export type EmployeeDocument = Employee & Document;
 @Schema()
 export class Employee {
     @ApiProperty()
-    @Prop()
-    @IsNotEmpty()
     @IsString()
+    @IsNotEmpty()
+    @Prop({ required: true })
     name: string;
 
     @ApiProperty()
-    @Prop()
-    @IsNotEmpty()
     @IsString()
+    @IsNotEmpty()
+    @Prop({ required: true })
     lastname: string;
 
     @ApiProperty()
-    @Prop()
+    @IsNumber()
     @IsNotEmpty()
-    @IsNumber() 
+    @Prop({ required: true })
     age: number;
 
     @ApiProperty()
-    @Prop()
-    @IsNotEmpty()
     @IsEmail()
+    @IsNotEmpty()
+    @Prop({ required: true })
     email: string;
 
     @ApiProperty({ type: () => [Skill] })
-    @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Skill' }] })
-    @IsArray() 
+    @IsArray()
+    @IsNotEmpty()
     @ValidateNested({ each: true })
     @Type(() => Skill)
+    @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Skill' }] })
     skills: Skill[];
 
     @ApiProperty({ type: () => Career }) 
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Career' }) 
+    @IsNotEmpty()
     @ValidateNested()
     @Type(() => Career)
+    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Career' }) 
     career: Career; 
 }
 

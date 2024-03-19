@@ -53,10 +53,23 @@ const CareersList: React.FC = () => {
     };
     const handleAddCareer = async (newCareer: Skill | Career) => {
         try {
-            const response = await axios.post<Career>('http://localhost:3000/career', newCareer);
-            setCareers(prevCareers => [...prevCareers, response.data]);
-            toast.success('Carrera agregada con éxito');
-            setIsAddModalOpen(false);
+            const existingCareer = await axios.get(`http://localhost:3000/career/${newCareer.name}`)
+                        .catch(error => {
+                            if (error.response && error.response.status === 404) {
+                                return null; 
+                            } else {
+                                throw error;
+                            }
+                        });
+            if(!existingCareer) {
+                const response = await axios.post<Career>('http://localhost:3000/career', newCareer);
+                setCareers(prevCareers => [...prevCareers, response.data]);
+                toast.success('Carrera agregada con éxito');
+                setIsAddModalOpen(false);
+            }
+            else {
+                toast.error('La carrera ya existe en la base de datos')
+            }
         } catch (error) {
             toast.error('Error al agregar carrera');
             console.error('Error adding career:', error);

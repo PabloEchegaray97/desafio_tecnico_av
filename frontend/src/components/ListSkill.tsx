@@ -63,10 +63,24 @@ const SkillsList: React.FC = () => {
 
     const handleAddSkill = async (newSkill: Skill) => {
         try {
-            const response = await axios.post<Skill>('http://localhost:3000/skill', newSkill);
-            setSkills(prevSkills => [...prevSkills, response.data]);
-            toast.success('Habilidad agregada con éxito')
-            setIsAddModalOpen(false);
+            const existingSkill = await axios.get(`http://localhost:3000/career/${newSkill.name}`)
+                        .catch(error => {
+                            if (error.response && error.response.status === 404) {
+                                return null; 
+                            } else {
+                                throw error;
+                            }
+                        });
+            if(!existingSkill) {
+                const response = await axios.post<Skill>('http://localhost:3000/skill', newSkill);
+                setSkills(prevSkills => [...prevSkills, response.data]);
+                toast.success('Habilidad agregada con éxito')
+                setIsAddModalOpen(false);
+            }
+            else {
+                toast.error('La habilidad ya existe en la base de datos')
+            }
+            
         } catch (error) {
             toast.error(`Error al agregar habilidad: ${error}`)
             console.error('Error adding skill:', error);
