@@ -70,9 +70,11 @@ npm install
 ```bash
 npm run start:dev
 ```
-
 Este comando ejecutará el servidor en modo de desarrollo.
-
+# Para ver la documentación y hacer testing dirigirse 
+```bash
+http://localhost:3000/api
+```
 ## Comandos para el Frontend
 
 1. **Instalación de dependencias:**
