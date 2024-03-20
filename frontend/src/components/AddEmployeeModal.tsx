@@ -13,7 +13,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { isEmail, isAlpha } from 'validator';
+import validator, { isEmail } from 'validator';
 
 interface Skill {
     _id: string;
@@ -89,7 +89,10 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ open, onClose, refr
 
     const handleAddEmployee = async () => {
         // Validar nombre y apellido
-        if (!isAlpha(name) || !isAlpha(lastname)) {
+        const validateName = (str: string) => {
+            return validator.isAlpha(str, 'es-ES')
+        }
+        if (!validateName(name) || !validateName(lastname)) {
             toast.error('El nombre y el apellido solo pueden contener letras.');
             return;
         }

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import ListEmployee from './components/ListEmployee';
 import ListCareer from './components/ListCareer';
 import ListSkill from './components/ListSkill'
-import NotFound from './components/NotFound'; // Importa el componente NotFound
+import NotFound from './components/NotFound';
 
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home";

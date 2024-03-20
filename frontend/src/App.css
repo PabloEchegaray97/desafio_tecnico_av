@@ -145,6 +145,10 @@ tr:hover {
 }
 
 /* modal */
+.css-qjf04m {
+  height: 100% !important;
+  overflow-y: auto;
+}
 .modal-container {
   display: flex;
   justify-content: center;

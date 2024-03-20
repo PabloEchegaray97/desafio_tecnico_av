@@ -58,9 +58,14 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
     const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
     const [selectedCareer, setSelectedCareer] = useState<string>('');
 
-    // Email original
     const [originalEmail, setOriginalEmail] = useState<string>('');
-
+    useEffect(() => {
+        setEmployee(prevEmployee => ({
+            ...prevEmployee,
+            skills: allSkills.filter(skill => selectedSkills.includes(skill._id))
+        }));
+    }, [selectedSkills, allSkills]);
+    
     useEffect(() => {
         const fetchEmployeeData = async () => {
             try {
@@ -73,7 +78,6 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
                     setEmployee(employeeData);
                     setSelectedSkills(employeeData.skills.map(skill => skill._id));
                     setSelectedCareer(employeeData.career?._id || '');
-                    // Guardar el email original
                     setOriginalEmail(employeeData.email);
                 } else {
                     console.error('Error: No se encontraron datos para el empleado');
@@ -139,6 +143,7 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
             skills: prevEmployee.skills.filter(skill => skill._id !== skillId)
         }));
     };
+    
 
     const checkExistingEmail = async (email: string) => {
         try {
@@ -159,20 +164,14 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
     };
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const validateName = (str: string) => {
+            return validator.isAlpha(str, 'es-ES')
+        }
         const value = e.target.value;
-        if (/^[a-zA-Z]+$/.test(value)) {
+        if (validateName(value)) {
             setEmployee({ ...employee, name: capitalizeFirstLetter(value) });
         } else {
-            toast.error('Ingrese un nombre válido (solo letras).');
-        }
-    };
-
-    const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        if (/^[a-zA-Z]+$/.test(value)) {
-            setEmployee({ ...employee, lastname: capitalizeFirstLetter(value) });
-        } else {
-            toast.error('Ingrese un apellido válido (solo letras).');
+            toast.error('El campo solo puede contener letras');
         }
     };
 
@@ -214,14 +213,17 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
                     label="Apellido"
                     variant="outlined"
                     value={employee.lastname}
-                    onChange={handleLastNameChange}
+                    onChange={handleNameChange}
                     sx={{ mt: 1, mb: 1, width: '100%' }}
                 />
                 <TextField
                     label="Edad"
                     variant="outlined"
                     value={employee.age}
-                    onChange={(e) => setEmployee({ ...employee, age: parseInt(e.target.value) || 0 })}
+                    onChange={(e) => {
+                        const value = parseInt(e.target.value)
+                        setEmployee({ ...employee, age: !isNaN(value) && value >= 0 && value <= 120 ? value : 0 })
+                    }}
                     sx={{ mt: 1, mb: 1, width: '100%' }}
                 />
                 <TextField
