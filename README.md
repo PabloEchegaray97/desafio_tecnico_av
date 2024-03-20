@@ -71,7 +71,7 @@ npm install
 npm run start:dev
 ```
 Este comando ejecutará el servidor en modo de desarrollo.
-# Para ver la documentación y hacer testing dirigirse 
+# Para ver la documentación y hacer testing dirigirse a:
 ```bash
 http://localhost:3000/api
 ```
