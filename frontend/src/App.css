@@ -146,7 +146,6 @@ tr:hover {
 
 /* modal */
 .css-qjf04m {
-  height: 100% !important;
   overflow-y: auto;
 }
 .modal-container {
@@ -241,6 +240,7 @@ tr:hover {
 }
 
 @media screen and (max-width: 768px) {
+
   .charts-container {
     flex-direction: column;
   }

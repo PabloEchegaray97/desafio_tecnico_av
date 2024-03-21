@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ResponsivePie } from '@nivo/pie';
-
-interface Employee {
-    _id: string;
-    name: string;
-    lastname: string;
-    age: number;
-    email: string;
-    skills: Skill[];
-}
-
-interface Skill {
-    _id: string;
-    name: string;
-}
+import { Skill, Employee } from '../types/types';
 
 const SkillsStatistics: React.FC = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -36,7 +23,6 @@ const SkillsStatistics: React.FC = () => {
         fetchData();
     }, []);
 
-    // Calcular datos para el gráfico de torta
     const pieChartData = skills.map(skill => ({
         id: skill.name,
         label: skill.name,

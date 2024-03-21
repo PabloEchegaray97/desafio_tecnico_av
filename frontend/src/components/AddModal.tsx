@@ -4,17 +4,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-
-interface Career {
-    _id: string;
-    name: string;
-    description: string;
-}
-
-interface Skill {
-    _id: string;
-    name: string;
-}
+import { Skill, Career,  } from '../types/types';
 
 interface AddModalProps<T> {
     open: boolean;

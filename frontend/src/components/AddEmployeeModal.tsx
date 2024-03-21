@@ -14,17 +14,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import validator, { isEmail } from 'validator';
-
-interface Skill {
-    _id: string;
-    name: string;
-}
-
-interface Career {
-    _id: string;
-    name: string;
-    description: string;
-}
+import { Skill, Career } from '../types/types';
 
 interface AddEmployeeModalProps {
     open: boolean;
@@ -88,7 +78,6 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ open, onClose, refr
     };
 
     const handleAddEmployee = async () => {
-        // Validar nombre y apellido
         const validateName = (str: string) => {
             return validator.isAlpha(str, 'es-ES')
         }

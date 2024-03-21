@@ -7,10 +7,8 @@ import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
 import AddModal from './AddModal';
 import { toast } from 'react-toastify';
-interface Skill {
-    _id: string;
-    name: string;
-}
+import { Skill } from '../types/types';
+
 
 const SkillsList: React.FC = () => {
     const [skills, setSkills] = useState<Skill[]>([]);

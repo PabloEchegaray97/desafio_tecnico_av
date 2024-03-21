@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-interface Employee {
-    _id: string;
-    name: string;
-    lastname: string;
-    age: number;
-    email: string;
+import { Employee } from '../types/types';
 
-}
 const EmployeeCount: React.FC = () => {
     const [currentCount, setCurrentCount] = useState<number>(0);
     const [targetCount, setTargetCount] = useState<number>(0);

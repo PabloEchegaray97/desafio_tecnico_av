@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ResponsiveBar } from '@nivo/bar';
-
-interface Employee {
-    _id: string;
-    name: string;
-    lastname: string;
-    age: number;
-    email: string;
-    skills: Skill[];
-}
-
-interface Skill {
-    _id: string;
-    name: string;
-}
+import { Skill, Employee } from '../types/types';
 
 const SkillsStatistics: React.FC = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -36,9 +23,13 @@ const SkillsStatistics: React.FC = () => {
         fetchData();
     }, []);
 
+    const getEmployeesCountBySkill = (skillId: string) => {
+        return employees.filter(employee => employee.skills.some(eSkill => eSkill._id === skillId)).length;
+    };
+
     const barChartData = skills.map(skill => ({
         skill: skill.name,
-        empleados: employees.filter(employee => employee.skills.some(eSkill => eSkill._id === skill._id)).length
+        empleados: getEmployeesCountBySkill(skill._id)
     }));
 
     return (
@@ -62,7 +53,8 @@ const SkillsStatistics: React.FC = () => {
                         tickRotation: 0,
                         legend: 'Empleados',
                         legendPosition: 'middle',
-                        legendOffset: -40
+                        legendOffset: -40,
+                        tickValues: [1, 2, 3, 4] 
                     }}
                     labelSkipWidth={12}
                     labelSkipHeight={12}

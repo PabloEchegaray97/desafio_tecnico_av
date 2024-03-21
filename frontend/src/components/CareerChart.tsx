@@ -5,6 +5,7 @@ import { ResponsivePie } from '@nivo/pie';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Button } from '@mui/material';
+import { Employee } from '../types/types';
 
 const CareerStatistics: React.FC = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -12,34 +13,12 @@ const CareerStatistics: React.FC = () => {
     const chartRefBar = useRef<HTMLDivElement>(null);
     const chartRefPie = useRef<HTMLDivElement>(null);
 
-    interface Skill {
-        _id: string;
-        name: string;
-    }
-
-    interface Career {
-        _id: string;
-        name: string;
-        description: string;
-    }
-
-    interface Employee {
-        _id: string;
-        name: string;
-        lastname: string;
-        age: number;
-        email: string;
-        skills: Skill[];
-        career?: Career;
-    }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const employeesResponse = await axios.get<Employee[]>('http://localhost:3000/employee');
                 setEmployees(employeesResponse.data);
-
-                // Obtener la lista de carreras únicas
                 const uniqueCareers = Array.from(new Set(employeesResponse.data.map(employee => employee.career?.name || '')));
                 setCareers(uniqueCareers);
             } catch (error) {
@@ -69,13 +48,11 @@ const CareerStatistics: React.FC = () => {
         }
     };
 
-    // Calcular datos para el gráfico de barras
     const barChartData = careers.map(career => ({
         career,
         empleados: employees.filter(employee => employee.career?.name === career).length
     }));
 
-    // Calcular datos para el gráfico de torta
     const pieChartData = careers.map(career => ({
         id: career,
         label: career,
@@ -105,7 +82,8 @@ const CareerStatistics: React.FC = () => {
                                 tickRotation: 0,
                                 legend: 'Empleados',
                                 legendPosition: 'middle',
-                                legendOffset: -40
+                                legendOffset: -40,
+                                tickValues: [1, 2, 3, 4] // Especificar los valores del eje y
                             }}
                             labelSkipWidth={12}
                             labelSkipHeight={12}
@@ -135,6 +113,7 @@ const CareerStatistics: React.FC = () => {
                                 }
                             ]}
                         />
+
                     </div>
                 </div>
                 <div className="statistics">
@@ -153,7 +132,7 @@ const CareerStatistics: React.FC = () => {
                 </div>
 
             </div>
-            <Button variant='contained' onClick={handleGeneratePDF} sx={{width:'10rem'}}>Generar PDF</Button>
+            <Button variant='contained' onClick={handleGeneratePDF} sx={{ width: '10rem' }}>Generar PDF</Button>
         </div>
     );
 };

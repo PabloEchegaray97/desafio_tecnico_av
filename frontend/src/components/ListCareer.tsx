@@ -7,17 +7,7 @@ import DeleteModal from './DeleteModal';
 import EditModal from './EditModal'; 
 import AddModal from './AddModal'; 
 import { toast } from 'react-toastify';
-
-interface Career {
-    _id: string;
-    name: string;
-    description: string;
-}
-
-interface Skill {
-    _id: string;
-    name: string;
-}
+import { Skill, Career } from '../types/types';
 
 const CareersList: React.FC = () => {
     const [careers, setCareers] = useState<Career[]>([]);

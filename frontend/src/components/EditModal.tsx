@@ -6,17 +6,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
-interface Skill {
-    _id: string;
-    name: string;
-}
-
-interface Career {
-    _id: string;
-    name: string;
-    description: string;
-}
+import { Skill, Career } from '../types/types';
 
 interface EditModalProps<T> {
     open: boolean;

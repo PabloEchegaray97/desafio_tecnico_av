@@ -7,16 +7,7 @@ import axios from 'axios';
 import DeleteModal from './DeleteModal';
 import AddEmployeeModal from './AddEmployeeModal';
 import EditEmployeeModal from './EditEmployeeModal';
-
-interface Employee {
-    _id: string;
-    name: string;
-    lastname: string;
-    age: number;
-    email: string;
-    skills: { _id: string; name: string }[];
-    career?: { _id: string; name: string; description: string };
-}
+import { Employee } from '../types/types';
 
 const EmployeesList: React.FC = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -128,13 +119,13 @@ const EmployeesList: React.FC = () => {
             <AddEmployeeModal
                 open={isAddModalOpen}
                 onClose={() => setIsAddModalOpen(false)}
-                refreshEmployees={fetchEmployees} // Pasar la función para actualizar empleados
+                refreshEmployees={fetchEmployees}
             />
             <EditEmployeeModal
                 open={isEditModalOpen}
                 onClose={() => setIsEditModalOpen(false)}
                 refreshEmployees={fetchEmployees}
-                employeeId={selectedEmployee?._id || ''} // Pasar el ID del empleado seleccionado al modal de edición
+                employeeId={selectedEmployee?._id || ''} 
             />
         </div>
     );
