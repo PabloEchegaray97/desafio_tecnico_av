@@ -54,7 +54,7 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
                     setSelectedSkills(employeeData.skills.map(skill => skill._id));
                     setSelectedCareer(employeeData.career?._id || '');
                     setOriginalEmail(employeeData.email);
-                    setAge(employeeData.age); 
+                    setAge(employeeData.age);
                 } else {
                     console.error('Error: No se encontraron datos para el empleado');
                 }
@@ -173,80 +173,80 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ open, onClose, em
                     label="Edad"
                     variant="outlined"
                     type='number'
-                    value={age}
+                    value={age === 0 ? '' : age.toString()}  
                     onChange={(e) => {
                         const value = parseInt(e.target.value);
                         if (!isNaN(value) && value >= 0 && value <= 120) {
-                            setAge(value);  
+                            setAge(value);
                         } else {
-                            setAge(0);  
+                            setAge(0);
                         }
                     }}
                     sx={{ mt: 1, mb: 1, width: '100%' }}
-                    />
-                    <TextField
-                        label="Email"
-                        variant="outlined"
-                        value={employee.email}
-                        onChange={(e) => setEmployee({ ...employee, email: e.target.value })}
-                        sx={{ mt: 1, mb: 1, width: '100%' }}
-                    />
-                    <Box sx={{ mt: 1, mb: 1, width: '100%' }}>
-                        <InputLabel>Seleccionar habilidades</InputLabel>
-                        <Select
-                            labelId="skills-label"
-                            multiple
-                            value={selectedSkills}
-                            onChange={(e) => setSelectedSkills(e.target.value as string[])}
-                            sx={{ width: '100%' }}
-                        >
-                            {allSkills.map((skill) => (
-                                <MenuItem key={skill._id} value={skill._id}>
-                                    {skill.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        <div className='d-flex w100 chips-container'>
-                            {selectedSkills.map((value) => (
-                                <div key={value}>
-                                    <Chip
-                                        label={allSkills.find((skill) => skill._id === value)?.name}
-                                        onDelete={() => setSelectedSkills((prevSkills) => prevSkills.filter((id) => id !== value))}
-                                        deleteIcon={<CancelIcon />}
-                                        sx={{ cursor: 'pointer' }}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </Box>
-                    <FormControl variant="outlined" sx={{ mt: 1, mb: 4, width: '100%' }}>
-                        <InputLabel id="career-label">Carrera</InputLabel>
-                        <Select
-                            labelId="career-label"
-                            value={selectedCareer}
-                            onChange={(e) => setSelectedCareer(e.target.value)}
-                            label="Carrera"
-                            sx={{ width: '100%' }}
-                        >
-                            {allCareers.map((career) => (
-                                <MenuItem key={career._id} value={career._id}>
-                                    {career.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                    <div className='w100 flex-center'>
-                        <Button variant="contained" onClick={handleEditEmployee} sx={{ mr: 2 }}>
-                            Editar
-                        </Button>
-                        <Button variant="outlined" onClick={onClose}>
-                            Cancelar
-                        </Button>
+                />
+
+                <TextField
+                    label="Email"
+                    variant="outlined"
+                    value={employee.email}
+                    onChange={(e) => setEmployee({ ...employee, email: e.target.value })}
+                    sx={{ mt: 1, mb: 1, width: '100%' }}
+                />
+                <Box sx={{ mt: 1, mb: 1, width: '100%' }}>
+                    <InputLabel>Seleccionar habilidades</InputLabel>
+                    <Select
+                        labelId="skills-label"
+                        multiple
+                        value={selectedSkills}
+                        onChange={(e) => setSelectedSkills(e.target.value as string[])}
+                        sx={{ width: '100%' }}
+                    >
+                        {allSkills.map((skill) => (
+                            <MenuItem key={skill._id} value={skill._id}>
+                                {skill.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                    <div className='d-flex w100 chips-container'>
+                        {selectedSkills.map((value) => (
+                            <div key={value}>
+                                <Chip
+                                    label={allSkills.find((skill) => skill._id === value)?.name}
+                                    onDelete={() => setSelectedSkills((prevSkills) => prevSkills.filter((id) => id !== value))}
+                                    deleteIcon={<CancelIcon />}
+                                    sx={{ cursor: 'pointer' }}
+                                />
+                            </div>
+                        ))}
                     </div>
                 </Box>
-            </Modal>
-        );
-    };
-    
-    export default EditEmployeeModal;
-    
+                <FormControl variant="outlined" sx={{ mt: 1, mb: 4, width: '100%' }}>
+                    <InputLabel id="career-label">Carrera</InputLabel>
+                    <Select
+                        labelId="career-label"
+                        value={selectedCareer}
+                        onChange={(e) => setSelectedCareer(e.target.value)}
+                        label="Carrera"
+                        sx={{ width: '100%' }}
+                    >
+                        {allCareers.map((career) => (
+                            <MenuItem key={career._id} value={career._id}>
+                                {career.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <div className='w100 flex-center'>
+                    <Button variant="contained" onClick={handleEditEmployee} sx={{ mr: 2 }}>
+                        Editar
+                    </Button>
+                    <Button variant="outlined" onClick={onClose}>
+                        Cancelar
+                    </Button>
+                </div>
+            </Box>
+        </Modal>
+    );
+};
+
+export default EditEmployeeModal;
