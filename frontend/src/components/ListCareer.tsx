@@ -83,14 +83,14 @@ const CareersList: React.FC = () => {
             <div className='title-button'>
                 <h2 className='table-title m-bottom m-top'>Lista de Carreras</h2>
                 <AddIcon
-                    sx={{ color: 'white', backgroundColor: 'black', cursor: 'pointer' }}
+                    sx={{ color: 'white', backgroundColor: '#1976d2', cursor: 'pointer' }}
                     onClick={() => setIsAddModalOpen(true)}
                 />
             </div>
             <table className='table'>
                 <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Carrera</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>

@@ -8,6 +8,7 @@ import DeleteModal from './DeleteModal';
 import AddEmployeeModal from './AddEmployeeModal';
 import EditEmployeeModal from './EditEmployeeModal';
 import { Employee } from '../types/types';
+import { toast } from 'react-toastify';
 
 const EmployeesList: React.FC = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -32,9 +33,11 @@ const EmployeesList: React.FC = () => {
     const handleDeleteEmployee = async () => {
         try {
             await axios.delete(`http://localhost:3000/employee/${selectedEmployee?._id}`);
+            toast.success('Empleado eliminado con éxito')
             fetchEmployees();
             setIsDeleteModalOpen(false);
         } catch (error) {
+            toast.error(`Error al eliminar empleado ${error}`)
             console.error('Error deleting employee:', error);
         }
     };
@@ -44,30 +47,27 @@ const EmployeesList: React.FC = () => {
             <div className='title-button'>
                 <h2 className='table-title m-bottom m-top'>Lista de Empleados</h2>
                 <AddIcon
-                    sx={{ color: 'white', backgroundColor: 'black', cursor: 'pointer' }}
+                    sx={{ color: 'white', backgroundColor: '#1976d2', cursor: 'pointer' }}
                     onClick={() => setIsAddModalOpen(true)}
                 />
             </div>
-            <div>
+            <div className='table-list'>
                 <table className='table'>
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Edad</th>
-                            <th>Email</th>
-                            <th>Habilidades</th>
+                            <th>Empleado</th>
                             <th>Carrera</th>
+                            <th>Habilidades</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {employees.map((employee) => (
                             <tr key={employee._id}>
-                                <td>{employee.name}</td>
-                                <td>{employee.lastname}</td>
-                                <td>{employee.age}</td>
-                                <td className='td-email'>{employee.email}</td>
+                                <td>{employee.name} {employee.lastname} ({employee.age}) <br />{employee.email}</td>
+                                <td>
+                                    {employee.career ? employee.career.name : '-'}
+                                </td>
                                 <td>
                                     {employee.skills.length > 0 ? (
                                         employee.skills.map((skill) => (
@@ -85,9 +85,7 @@ const EmployeesList: React.FC = () => {
                                         '-'
                                     )}
                                 </td>
-                                <td>
-                                    {employee.career ? employee.career.name : '-'}
-                                </td>
+                                
                                 <td>
                                     <EditIcon
                                         sx={{ color: '#FFBC52', cursor: 'pointer' }}

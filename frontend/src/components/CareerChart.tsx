@@ -33,20 +33,25 @@ const CareerStatistics: React.FC = () => {
         if (chartRefBar.current && chartRefPie.current) {
             const chartCanvasBar = await html2canvas(chartRefBar.current);
             const chartCanvasPie = await html2canvas(chartRefPie.current);
-
+    
             const doc = new jsPDF();
             const imgDataBar = chartCanvasBar.toDataURL('image/jpeg', 1.0);
             const imgDataPie = chartCanvasPie.toDataURL('image/jpeg', 1.0);
-
-            doc.addImage(imgDataBar, 'JPEG', 10, 20, 180, 100);
-            doc.addImage(imgDataPie, 'JPEG', 10, 130, 180, 100);
-
+            doc.setFontSize(16);
+            doc.text('Distribución de empleados por carrera', 10, 15);
+            doc.setFontSize(12);
+            doc.text('Gráfico de barras', 10, 30);
+            doc.addImage(imgDataBar, 'JPEG', 10, 35, 180, 100);
+            doc.text('Gráfico circular', 10, 150);
+            doc.addImage(imgDataPie, 'JPEG', 10, 155, 180, 100);
             const totalEmployees = employees.length;
-            doc.text(`Total de empleados: ${totalEmployees}`, 10, 250);
-
+            doc.setFontSize(10);
+            doc.text(`Total de empleados: ${totalEmployees}`, 10, 270);
             doc.save('career_statistics.pdf');
         }
     };
+    
+    
 
     const barChartData = careers.map(career => ({
         career,
@@ -83,7 +88,7 @@ const CareerStatistics: React.FC = () => {
                                 legend: 'Empleados',
                                 legendPosition: 'middle',
                                 legendOffset: -40,
-                                tickValues: [1, 2, 3, 4] // Especificar los valores del eje y
+                                tickValues: [1, 2, 3, 4]
                             }}
                             labelSkipWidth={12}
                             labelSkipHeight={12}

@@ -90,14 +90,14 @@ const SkillsList: React.FC = () => {
             <div className='title-button'>
                 <h2 className='table-title m-bottom m-top'>Lista de Habilidades</h2>
                 <AddIcon
-                    sx={{ color: 'white', backgroundColor: 'black', cursor: 'pointer' }}
+                    sx={{ color: 'white', backgroundColor: '#1976d2', cursor: 'pointer' }}
                     onClick={() => setIsAddModalOpen(true)}
                 />
             </div>
             <table className='table'>
                 <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Habilidad</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
